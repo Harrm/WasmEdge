@@ -179,6 +179,12 @@ public:
     return std::forward<CallbackT>(CallBack)(ExpGlobals);
   }
 
+  template <typename CallbackT>
+  auto getDataInstances(CallbackT &&CallBack) const noexcept {
+    std::shared_lock Lock(Mutex);
+    return std::forward<CallbackT>(CallBack)(DataInsts);
+  }
+
 protected:
   friend class Executor::Executor;
   friend class Runtime::CallingFrame;

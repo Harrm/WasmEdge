@@ -82,6 +82,12 @@ typedef struct WasmEdge_Limit {
   uint32_t Max;
 } WasmEdge_Limit;
 
+typedef struct WasmEdge_DataSegment {
+  const uint8_t *Data;
+  uint32_t Length;
+  uint32_t Offset;
+} WasmEdge_DataSegment;
+
 /// Opaque struct of WasmEdge configure.
 typedef struct WasmEdge_ConfigureContext WasmEdge_ConfigureContext;
 
@@ -2116,6 +2122,21 @@ WASMEDGE_CAPI_EXPORT extern uint32_t WasmEdge_ModuleInstanceListGlobalLength(
 WASMEDGE_CAPI_EXPORT extern uint32_t
 WasmEdge_ModuleInstanceListGlobal(const WasmEdge_ModuleInstanceContext *Cxt,
                                   WasmEdge_String *Names, const uint32_t Len);
+
+/// List the data section of the module instance.
+///
+/// If the `Segments` buffer length is smaller than the result of the data
+/// section size, the overflowed return values will be discarded.
+///
+/// \param Cxt the WasmEdge_ModuleInstanceContext.
+/// \param [out] Segments the data segment buffer. Can be NULL if data segments
+/// are not needed.
+/// \param Len the buffer length.
+///
+/// \returns actual data segment list size.
+WASMEDGE_CAPI_EXPORT extern uint32_t WasmEdge_ModuleInstanceListDataSegments(
+    const WasmEdge_ModuleInstanceContext *Cxt, WasmEdge_DataSegment *Segments,
+    const uint32_t Len);
 
 /// Add a function instance context into a WasmEdge_ModuleInstanceContext.
 ///

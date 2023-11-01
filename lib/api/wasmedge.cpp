@@ -1026,6 +1026,27 @@ WASMEDGE_CAPI_EXPORT uint32_t WasmEdge_ASTModuleListExports(
   return 0;
 }
 
+WASMEDGE_CAPI_EXPORT uint32_t WasmEdge_ModuleInstanceListDataSegments(
+    const WasmEdge_ModuleInstanceContext *Cxt, WasmEdge_DataSegment *Segments,
+    const uint32_t Len) {
+  if (Cxt) {
+    const auto &Instance = fromModCxt(Cxt);
+    return Instance->getDataInstances(
+        [Len,
+         Segments](const std::vector<Runtime::Instance::DataInstance *> &Data) {
+          if (Segments) {
+            for (uint32_t I = 0; I < Data.size() && I < Len; I++) {
+              Segments[I].Offset = Data[I]->getOffset();
+              Segments[I].Data = Data[I]->getData().data();
+              Segments[I].Length = Data[I]->getData().size();
+            }
+          }
+          return Data.size();
+        });
+  }
+  return 0;
+}
+
 WASMEDGE_CAPI_EXPORT void
 WasmEdge_ASTModuleDelete(WasmEdge_ASTModuleContext *Cxt) {
   std::unique_ptr<WasmEdge::AST::Module> Own(fromASTModCxt(Cxt));
