@@ -80,7 +80,7 @@ Expect<void> Executor::initMemory(Runtime::StackManager &StackMgr,
       }
 
       // Drop the data instance.
-      DataInst->clear();
+      // DataInst->clear();
 
       // Operation above is equal to the following instruction sequence:
       //   expr(init) -> i32.const off
