@@ -11,7 +11,7 @@ include(cmake/HunterGate.cmake)
 
 HunterGate(
   URL  https://github.com/qdrvm/hunter/archive/heads/feature/wasm-edge.zip
-  SHA1 abd3cccb98e579ba223c3436e8b4e3cd43a6f715
+  SHA1 1d1c85af9a27cb3990c3ec641bde99e3ffb1df12
   LOCAL
 )
 
