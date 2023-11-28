@@ -6,6 +6,15 @@ cmake_policy(SET CMP0091 NEW)
 if (CMAKE_VERSION VERSION_GREATER_EQUAL "3.24.0")
   cmake_policy(SET CMP0135 NEW)
 endif()
+
+include(cmake/HunterGate.cmake)
+
+HunterGate(
+  URL  https://github.com/qdrvm/hunter/archive/heads/feature/wasm-edge.zip
+  SHA1 abd3cccb98e579ba223c3436e8b4e3cd43a6f715
+  LOCAL
+)
+
 project(WasmEdge)
 
 # Overwrite it if you want to use static MSVC runtime library.
