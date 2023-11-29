@@ -8,6 +8,7 @@ list(APPEND CMAKE_MODULE_PATH ${LLVM_DIR})
 include(LLVMConfig)
 include(AddLLVM)
 
+hunter_add_package(LLD)
 get_filename_component(LLD_DIR "${LLVM_LIBRARY_DIR}/cmake/lld" ABSOLUTE)
 find_package(LLD REQUIRED HINTS ${LLD_DIR})
 
