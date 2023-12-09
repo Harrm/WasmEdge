@@ -37,6 +37,7 @@ else()
     -Wextra
     -Werror
     -Wno-error=pedantic
+    -Wno-error=dangling-reference
   )
 
   if(WASMEDGE_ENABLE_UB_SANITIZER)
@@ -232,7 +233,7 @@ if((WASMEDGE_LINK_LLVM_STATIC OR WASMEDGE_BUILD_STATIC_LIB) AND WASMEDGE_BUILD_A
     list(APPEND WASMEDGE_LLVM_LINK_SHARED_COMPONENTS
       rt
     )
-    if(WASMEDGE_BUILD_STATIC_LIB)
+    if(WASMEDGE_BUILD_STATIC_LIB AND WASMEDGE_PLUGIN_ZLIB)
       # Static library will forcefully turn off the LTO.
       # Therefore, libz and libtinfo can be statically linked.
       find_package(ZLIB REQUIRED)

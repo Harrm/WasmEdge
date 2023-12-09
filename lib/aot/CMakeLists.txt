@@ -1,14 +1,12 @@
 # SPDX-License-Identifier: Apache-2.0
 # SPDX-FileCopyrightText: 2019-2022 Second State INC
 
-hunter_add_package(LLVM)
 find_package(LLVM REQUIRED HINTS "${LLVM_CMAKE_PATH}")
 get_filename_component(LLVM_DIR "${LLVM_DIR}" ABSOLUTE)
 list(APPEND CMAKE_MODULE_PATH ${LLVM_DIR})
 include(LLVMConfig)
 include(AddLLVM)
 
-hunter_add_package(LLD)
 get_filename_component(LLD_DIR "${LLVM_LIBRARY_DIR}/cmake/lld" ABSOLUTE)
 find_package(LLD REQUIRED HINTS ${LLD_DIR})
 
