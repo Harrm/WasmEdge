@@ -37,8 +37,11 @@ else()
     -Wextra
     -Werror
     -Wno-error=pedantic
-    -Wno-error=dangling-reference
   )
+
+  if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL "13.0.0")
+    list(APPEND -Wno-error=dangling-reference)
+  endif()
 
   if(WASMEDGE_ENABLE_UB_SANITIZER)
     list(APPEND WASMEDGE_CFLAGS -fsanitize=undefined)
